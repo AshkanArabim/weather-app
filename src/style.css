@@ -1,0 +1,29 @@
+* {
+  border: 1px solid black;
+}
+
+body {
+  position: absolute;
+  inset: 0;
+}
+
+.hourly, .daily, .summary, header {
+  display: flex;
+}
+
+header{
+  justify-content: center;
+}
+
+.summary {
+  justify-content: space-between;
+}
+
+.summary > * {
+  padding: 20px;
+}
+
+footer {
+  position: absolute;
+  inset: auto 0 0 0;
+}
