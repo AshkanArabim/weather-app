@@ -11,6 +11,14 @@ body {
   display: flex;
 }
 
+.hourly, .daily {
+  justify-content: space-between;
+}
+
+.days {
+  display: flex;
+}
+
 header{
   justify-content: center;
 }
@@ -21,6 +29,11 @@ header{
 
 .summary > * {
   padding: 20px;
+}
+
+.details > p {
+  display: flex;
+  justify-content: space-between;
 }
 
 footer {
