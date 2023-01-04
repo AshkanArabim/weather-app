@@ -11,19 +11,12 @@ function render() {
 
 async function data() {
   const key = "d4c3301e7c7b03c479ca4c063371796e";
-  return await getCoords("el paso", key)
-  .then(coords => getCurrentWeather(coords[0], coords[1], key));
+  return await getCurrentWeather("el paso", key);
 }
 
-// convert city name to latitude and longitude
-async function getCoords(cityName, key) {
-  return await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${key}`)
-    .then((response) => response.json())
-}
-
-async function getCurrentWeather(lat, lon, key) {
+async function getCurrentWeather(city, key) {
   // TODO: (later) add support for state and country names
-  return await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`)
+  return await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`)
     .then((response) => response.json())
 }
 
