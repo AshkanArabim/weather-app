@@ -11,7 +11,7 @@ function render() {
 
 async function data() {
   const key = "d4c3301e7c7b03c479ca4c063371796e";
-  return await getPollution("el paso", key);
+  return await get3Hourly("el paso", key);
 }
 
 async function getCurrent(city, key) {
@@ -35,12 +35,20 @@ async function getPollution(city, key) {
   .then(coords => fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=${key}`))
 }
 
+async function get3Hourly(city, key) {
+  // TODO: (later) add support for state and country names
+  return await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}`)
+    .then((response) => response.json())
+}
+
+// PAID
 async function getHourly(city, key) {
   // TODO: (later) add support for state and country names
   return await fetch(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${key}`)
     .then((response) => response.json())
 }
 
+//PAID
 async function getWeekly(city, key) {
   // TODO: (later) add support for state and country names
   return await fetch(`api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${key}`)
