@@ -1,9 +1,21 @@
 // DATA
-// USELESS FOR NOW, MAY CHANGE LATER
+// contains all functions that deal with handline data form OpenWeatherMap
 
-export default async function data() {
+export default async function data(city) {
   const key = "d4c3301e7c7b03c479ca4c063371796e";
-  return await get3Hourly("el paso", key);
+
+  let current = await getCurrent(city);
+  let pollution = await getPollution(city);
+  let forecast = await get3Hourly(city);
+
+  // return the 
+  return Promise.all([current, pollution, forecast]).then((response) => {
+    return {
+      current: current,
+      pollution: pollution,
+      forecast: forecast,
+    };
+  });
 
   async function getCurrent(city) {
     // TODO: (later) add support for state and country names

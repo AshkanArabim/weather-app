@@ -1,8 +1,10 @@
 // DOM
 // job: renders the data provided by data.js by writing to the dom
 
+import data from './data';
+
 export default function render() {
-  data().then((resp) => console.log(resp));
+  data('el paso').then((resp) => console.log(resp));
 
   // utilities for dom manipulation
   function cr(element) {
