@@ -3,22 +3,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    index: './src/index.js'
+    index: "./src/index.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
     clean: true,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-    }),
-  ],
+  plugins: [new HtmlWebpackPlugin({})],
   module: {
     rules: [
       { test: /\.css$/i, use: ["style-loader", "css-loader"] },
-      { test: /\.svg/i, type: "asset/resource" }
+      { test: /\.svg/i, type: "asset/resource" },
     ],
   },
 };

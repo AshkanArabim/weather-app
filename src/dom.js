@@ -1,10 +1,51 @@
 // DOM
 // job: renders the data provided by data.js by writing to the dom
 
-import data from './data';
+import getData from "./data";
 
 export default function render() {
-  data('el paso').then((resp) => console.log(resp));
+  getData("el paso").then((data) => dom(data));
+  const body = qs("body");
+
+  // generates the dom tree and fills in the information
+  function dom(data) {
+    console.log(data);
+    header(); // generate header
+    dashboard(); // generate dashboard
+    // generate hourly (every 3 hours, just next 24hrs)
+    // generate daily (5 days)
+
+    // generate footer
+    appChilds(body, etc("footer", "©AshkanArabim, 2022"));
+  }
+
+  // make header
+  function header() {
+    const header = cr("header");
+    const searchform = etc("form", "", "searchform");
+    const searchbar = etc("input", "", "search");
+    const unitbtn = etc("button", "C/F", "chunit");
+    const searchbtn = etc("button", "Search", "searchbtn");
+
+    sa(searchbar, "placeholder", "search city");
+    sa(searchbar, "type", "text");
+    appChilds(body, header);
+    appChilds(header, searchform, unitbtn);
+    appChilds(searchform, searchbar, searchbtn);
+  }
+
+  function dashboard() {
+    const dashboard = etc('div','','dashboard');
+    const brief = etc('div','','brief');
+    const details = etc('div','','details');
+    const city = etc('h2','--','city');
+    const temp = etc('h1','--','temp');
+    const sky = etc('h3','--','sky');
+
+    appChilds(body, dashboard);
+    appChilds(dashboard, brief, details);
+    appChilds(brief, city, temp, sky);
+  }
 
   // utilities for dom manipulation
   function cr(element) {
@@ -15,7 +56,7 @@ export default function render() {
     return document.querySelector(query);
   }
 
-  function appChildren(parent) {
+  function appChilds(parent) {
     for (let i = 1; i <= arguments.length - 1; i++) {
       parent.appendChild(arguments[i]);
     }
@@ -30,5 +71,9 @@ export default function render() {
       }
     }
     return product;
+  }
+
+  function sa(element, attr, val) {
+    element.setAttribute(attr, val);
   }
 }

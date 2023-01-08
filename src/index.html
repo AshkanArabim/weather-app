@@ -5,25 +5,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather!</title>
+    <style>
+      * {
+        border: 1px solid black;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        position: absolute;
+        inset: 0;
+      }
+
+      .hourly,
+      .daily,
+      .summary,
+      header {
+        display: flex;
+      }
+
+      .hourly,
+      .daily {
+        justify-content: space-between;
+      }
+
+      .days {
+        display: flex;
+      }
+
+      header {
+        justify-content: center;
+      }
+
+      .summary {
+        justify-content: space-between;
+      }
+
+      .summary > * {
+        padding: 20px;
+      }
+
+      .details > p {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      footer {
+        position: absolute;
+        inset: auto 0 0 0;
+      }
+
+      .hourly-chart {
+        flex: 1 0 0;
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .hourly-chart > * {
+        flex: 1 1 0;
+      }
+    </style>
   </head>
   <body>
-    <header>
+    <!-- WORKING ON THIS -->
+    <header> 
       <input type="text" id="search" placeholder="search city" />
       <button type="button">C/F</button>
     </header>
     <div class="summary">
       <div>
-        <h2 id="city">El Paso, TX</h2>
-        <h1 id="temp">69°</h1>
+        <h2 id="city">--</h2>
+        <h1 id="temp">--</h1>
         <h3 id="weather">Sunny</h3>
       </div>
       <div class="details">
-        <p id="feel"><span>Real feel: </span><span id="feeldata">Dope AF</span></p>
-        <p id="wind"><span>Max Wind: </span><span id="winddata">5mph</span></p>
-        <p id="visibility"><span>Visibility: </span><span id="visibilitydata">10 mi</span></p>
-        <p id="bar"><span>Barometer: </span><span id="bardata">1.1 atm</span></p>
-        <p id="humid"><span>Humidity: </span><span id="humiddata">35%</span></p>
-        <p id="dew"><span>Dew Point: </span><span id="dewdata">20°</span></p>
+        <p id="feel"><span>Real feel: </span><span id="feeldata">--</span></p>
+        <p id="wind"><span>Max Wind: </span><span id="winddata">--</span></p>
+        <p id="visibility"><span>Visibility: </span><span id="visibilitydata">--</span></p>
+        <p id="bar"><span>Barometer: </span><span id="bardata">--</span></p>
+        <p id="humid"><span>Humidity: </span><span id="humiddata">--</span></p>
+        <p id="dew"><span>Dew Point: </span><span id="dewdata">--</span></p>
       </div>
     </div>
 
@@ -38,8 +99,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
         <div class="day">
@@ -49,8 +110,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
         <div class="day">
@@ -60,8 +121,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
         <div class="day">
@@ -71,8 +132,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
         <div class="day">
@@ -82,8 +143,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
         <div class="day">
@@ -93,8 +154,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
         <div class="day">
@@ -104,8 +165,8 @@
           </div>
           <img src="" alt="no info" class="weatherglyph" />
           <div class="maxmintemp">
-            <span class="maxtemp">70°</span>
-            <span class="mintemp">20°</span>
+            <span class="maxtemp">--</span>
+            <span class="mintemp">--</span>
           </div>
         </div>
       </div>

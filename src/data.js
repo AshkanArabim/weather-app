@@ -8,8 +8,8 @@ export default async function data(city) {
   let pollution = await getPollution(city);
   let forecast = await get3Hourly(city);
 
-  // return the 
-  return Promise.all([current, pollution, forecast]).then((response) => {
+  // return the
+  return Promise.all([current, pollution, forecast]).then(() => {
     return {
       current: current,
       pollution: pollution,
