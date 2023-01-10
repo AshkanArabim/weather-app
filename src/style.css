@@ -9,7 +9,7 @@ body {
   inset: 0;
 }
 
-.hourly, .daily, .summary, header {
+.hourly, .daily, .dashboard, header {
   display: flex;
 }
 
@@ -25,11 +25,11 @@ header{
   justify-content: center;
 }
 
-.summary {
+.dashboard {
   justify-content: space-between;
 }
 
-.summary > * {
+.dashboard > * {
   padding: 20px;
 }
 

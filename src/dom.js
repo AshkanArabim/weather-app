@@ -36,15 +36,58 @@ export default function render() {
 
   function dashboard() {
     const dashboard = etc('div','','dashboard');
+
+    //create summary section
     const brief = etc('div','','brief');
-    const details = etc('div','','details');
     const city = etc('h2','--','city');
     const temp = etc('h1','--','temp');
     const sky = etc('h3','--','sky');
+    
+    //create details section
+    const details = etc('div','','details');
+    const feel  = etc('p','','feel');
+    const wind = etc('p','','wind');
+    const visibility = etc('p','','visibility');
+    const bar = etc('p','','bar');
+    const humid = etc('p','','humic');
+    const dew = etc('p','','dew');
 
+    appChilds(
+      feel,
+      etc('span','Real Feeling:'),
+      etc('span','--','data')
+    )
+    appChilds(
+      wind,
+      etc('span','Max Wind:'),
+      etc('span','--','data')
+    )
+    appChilds(
+      visibility,
+      etc('span','Visibility:'),
+      etc('span','--','data')
+    )
+    appChilds(
+      bar,
+      etc('span','Air Pressure:'),
+      etc('span','--','data')
+    )
+    appChilds(
+      humid,
+      etc('span','Humidity:'),
+      etc('span','--','data')
+    )
+    appChilds(
+      dew,
+      etc('span','Dew Point:'),
+      etc('span','--','data')
+    )
+
+    // create the hierarchy
     appChilds(body, dashboard);
     appChilds(dashboard, brief, details);
     appChilds(brief, city, temp, sky);
+    appChilds(details, feel, wind, visibility, bar, humid, dew)
   }
 
   // utilities for dom manipulation
