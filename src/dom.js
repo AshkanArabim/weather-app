@@ -11,7 +11,7 @@ export default function render() {
   function dom(data) {
     console.log(data);
     header(); // generate header
-    dashboard(); // generate dashboard
+    dashboard(data.current); // generate dashboard
     // generate hourly (every 3 hours, just next 24hrs)
     // generate daily (5 days)
 
@@ -34,60 +34,37 @@ export default function render() {
     appChilds(searchform, searchbar, searchbtn);
   }
 
-  function dashboard() {
-    const dashboard = etc('div','','dashboard');
+  function dashboard(current) {
+    const dashboard = etc("div", "", "dashboard");
+    console.log(current);
 
     //create summary section
-    const brief = etc('div','','brief');
-    const city = etc('h2','--','city');
-    const temp = etc('h1','--','temp');
-    const sky = etc('h3','--','sky');
-    
-    //create details section
-    const details = etc('div','','details');
-    const feel  = etc('p','','feel');
-    const wind = etc('p','','wind');
-    const visibility = etc('p','','visibility');
-    const bar = etc('p','','bar');
-    const humid = etc('p','','humic');
-    const dew = etc('p','','dew');
+    //TODO: add all the data in proper elements
+    const brief = etc("div", "", "brief");
+    const city = etc("h2", current.name, "city");
+    const temp = etc("h1", Math.floor(current.main.temp) + "°", "temp");
+    const sky = etc("h3", current.weather[0].main, "sky");
 
-    appChilds(
-      feel,
-      etc('span','Real Feeling:'),
-      etc('span','--','data')
-    )
-    appChilds(
-      wind,
-      etc('span','Max Wind:'),
-      etc('span','--','data')
-    )
-    appChilds(
-      visibility,
-      etc('span','Visibility:'),
-      etc('span','--','data')
-    )
-    appChilds(
-      bar,
-      etc('span','Air Pressure:'),
-      etc('span','--','data')
-    )
-    appChilds(
-      humid,
-      etc('span','Humidity:'),
-      etc('span','--','data')
-    )
-    appChilds(
-      dew,
-      etc('span','Dew Point:'),
-      etc('span','--','data')
-    )
+    //create details section
+    const details = etc("div", "", "details");
+    const feel = etc("p", "", "feel");
+    const wind = etc("p", "", "wind");
+    const visibility = etc("p", "", "visibility");
+    const bar = etc("p", "", "bar");
+    const humid = etc("p", "", "humic");
+    const dew = etc("p", "", "dew");
+
+    appChilds(feel, etc("span", "Feels like:"), etc("span", Math.floor(current.main.feels_like), "data"));
+    appChilds(wind, etc("span", "Max Wind:"), etc("span", `${current.wind.speed}m/s, ${current.wind.deg}°`, "data"));
+    appChilds(visibility, etc("span", "Visibility:"), etc("span", current.visibility + "m", "data"));
+    appChilds(bar, etc("span", "Air Pressure:"), etc("span", current.main.pressure + "hPa", "data"));
+    appChilds(humid, etc("span", "Humidity:"), etc("span", current.main.humidity + "%", "data"));
 
     // create the hierarchy
     appChilds(body, dashboard);
     appChilds(dashboard, brief, details);
     appChilds(brief, city, temp, sky);
-    appChilds(details, feel, wind, visibility, bar, humid, dew)
+    appChilds(details, feel, wind, visibility, bar, humid, dew);
   }
 
   // utilities for dom manipulation

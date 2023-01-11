@@ -19,7 +19,7 @@ export default async function data(city) {
 
   async function getCurrent(city) {
     // TODO: (later) add support for state and country names
-    return await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`).then((response) => response.json());
+    return await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`).then((response) => response.json());
   }
 
   // convert city name to latitude and longitude --> sometimes useful
@@ -41,7 +41,7 @@ export default async function data(city) {
 
   async function get3Hourly(city) {
     // TODO: (later) add support for state and country names
-    return await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}`)
+    return await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`)
       .then((response) => response.json())
       .then((response) => response.list); // returns data instead of other stuff
   }
