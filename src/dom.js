@@ -12,8 +12,8 @@ export default function render() {
     console.log(data);
     header(); // generate header
     dashboard(data.current); // generate dashboard
-    // generate hourly (every 3 hours, just next 24hrs)
-    // generate daily (5 days)
+    daily(data.forecast); // generate daily 5 days
+    threeHourly(data.forecast); // generate hourly (every 3 hours, just next 24hrs)
 
     // generate footer
     appChilds(body, etc("footer", "©AshkanArabim, 2022"));
@@ -65,6 +65,37 @@ export default function render() {
     appChilds(dashboard, brief, details);
     appChilds(brief, city, temp, sky);
     appChilds(details, feel, wind, visibility, bar, humid, dew);
+  }
+
+  function daily(forecast) {
+    console.log(forecast);
+
+    const daily = etc('div','','daily');
+    const title = etc('h3','daily');
+    const days = etc('div','','days');
+
+    appChilds(body, daily);
+    appChilds(daily, title, days);
+
+    for (let i = 0; i < 5; i++) {
+      const daycell = etc('div','','daycell');
+      const dateandday = etc('div','','dateandday');
+      const weekday = etc('span','','weekday');
+      const date = etc('span','','date');
+      const weatherGlyph = etc('img','','weatherglyph');
+      const minmaxtemp = etc('div','','minmaxtemp');
+      const maxtemp = etc('span','','maxtemp');
+      const mintemp = etc('span','','mintemp');
+
+      appChilds(days, daycell);
+      appChilds(daycell, dateandday, weatherGlyph, minmaxtemp);
+      appChilds(dateandday, weekday, date);
+      appChilds(minmaxtemp, maxtemp, mintemp);
+    }
+  }
+
+  function threeHourly(forecast) {
+    console.log(forecast);
   }
 
   // utilities for dom manipulation
