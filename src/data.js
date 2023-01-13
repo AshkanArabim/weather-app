@@ -4,18 +4,8 @@
 export default async function data(city) {
   const key = "d4c3301e7c7b03c479ca4c063371796e";
 
-  let current = await getCurrent(city);
-  let pollution = await getPollution(city);
-  let forecast = await get3Hourly(city);
-
   // return the
-  return Promise.all([current, pollution, forecast]).then(() => {
-    return {
-      current: current,
-      pollution: pollution,
-      forecast: forecast,
-    };
-  });
+  return await getCurrent(city);
 
   async function getCurrent(city) {
     // TODO: (later) add support for state and country names
@@ -29,20 +19,5 @@ export default async function data(city) {
       .then((response) => {
         return [response[0].lat, response[0].lon];
       });
-  }
-
-  async function getPollution(city) {
-    // TODO: (later) add support for state and country names
-    return await getCoords(city, key)
-      .then((coords) => fetch(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coords[0]}&lon=${coords[1]}&appid=${key}`))
-      .then((response) => response.json())
-      .then((response) => response.list); // returns the actual data instead of the useless stuff
-  }
-
-  async function get3Hourly(city) {
-    // TODO: (later) add support for state and country names
-    return await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`)
-      .then((response) => response.json())
-      .then((response) => response.list); // returns data instead of other stuff
   }
 }
