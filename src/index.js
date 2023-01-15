@@ -1,4 +1,4 @@
-import dom from "./dom.js";
+import render from "./dom.js";
 import data from "./data.js";
 import css from "./style.css";
 
@@ -10,4 +10,4 @@ for (let graph of graphs) {
   graph.style.height = `${h}px`;
 }
 
-dom();
+render('el paso',false);

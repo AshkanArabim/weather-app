@@ -3,17 +3,16 @@
 
 import getData from "./data";
 
-export default function render() {
-  let city = "el paso";
-  if (arguments[0]) {
-    city = arguments[0];
-  }
+export default function render(city, isMetric) {
   const body = qs("body");
+  const unit = isMetric ? "°C" : "°F";
+  const speedUnit = isMetric ? "m/s" : "mph";
   body.textContent = ""; // clears the body
-  getData(city).then((data) => dom(data));
+  getData(city, isMetric).then((data) => dom(data));
 
   // generates the dom tree and fills in the information
   function dom(data) {
+    console.log(data);
     header();
     dashboard(data);
     appChilds(body, etc("footer", "©AshkanArabim, 2022")); //footer
@@ -29,8 +28,10 @@ export default function render() {
 
     searchform.addEventListener("submit", (event) => {
       event.preventDefault();
-      city = searchbar.value;
-      render(city);
+      render(searchbar.value, isMetric);
+    });
+    unitbtn.addEventListener("click", () => {
+      render(city, !isMetric);
     });
 
     sa(searchbar, "placeholder", "search city");
@@ -40,17 +41,20 @@ export default function render() {
     appChilds(searchform, searchbar, searchbtn);
   }
 
-  function dashboard(current) {
+  function dashboard(data) {
     const dashboard = etc("div", "", "dashboard");
+    const countryCode = data.sys.country;
 
     //create summary section
     const brief = etc("div", "", "brief");
-    const city = etc("h2", current.name, "city");
-    const temp = etc("h1", Math.floor(current.main.temp) + "°", "temp");
-    const sky = etc("h3", current.weather[0].main, "sky");
+    const city = etc("h2", `${data.name}, ${getFlagEmoji(countryCode)}`, "city");
+    const temp = etc("h1", Math.floor(data.main.temp) + unit, "temp");
+    const sky = etc("h3", data.weather[0].main, "sky");
 
     //create details section
     const details = etc("div", "", "details");
+    const min = etc("p", "", "min");
+    const max = etc("p", "", "max");
     const feel = etc("p", "", "feel");
     const wind = etc("p", "", "wind");
     const visibility = etc("p", "", "visibility");
@@ -58,20 +62,23 @@ export default function render() {
     const humid = etc("p", "", "humic");
     const dew = etc("p", "", "dew");
 
-    appChilds(feel, etc("span", "Feels like:"), etc("span", Math.floor(current.main.feels_like), "data"));
-    appChilds(wind, etc("span", "Max Wind:"), etc("span", `${current.wind.speed}m/s, ${current.wind.deg}°`, "data"));
-    appChilds(visibility, etc("span", "Visibility:"), etc("span", current.visibility + "m", "data"));
-    appChilds(bar, etc("span", "Air Pressure:"), etc("span", current.main.pressure + "hPa", "data"));
-    appChilds(humid, etc("span", "Humidity:"), etc("span", current.main.humidity + "%", "data"));
+    appChilds(min, etc("span", "Min:"), etc("span", Math.floor(data.main.temp_min) + unit, "data"));
+    appChilds(max, etc("span", "Max:"), etc("span", Math.floor(data.main.temp_max) + unit, "data"));
+    appChilds(feel, etc("span", "Feels like:"), etc("span", Math.floor(data.main.feels_like) + unit, "data"));
+    appChilds(wind, etc("span", "Max Wind:"), etc("span", `${data.wind.speed + speedUnit}, ${data.wind.deg}°`, "data"));
+    appChilds(visibility, etc("span", "Visibility:"), etc("span", data.visibility + "m", "data"));
+    appChilds(bar, etc("span", "Air Pressure:"), etc("span", data.main.pressure + "hPa", "data"));
+    appChilds(humid, etc("span", "Humidity:"), etc("span", data.main.humidity + "%", "data"));
 
     // create the hierarchy
     appChilds(body, dashboard);
     appChilds(dashboard, brief, details);
     appChilds(brief, city, temp, sky);
-    appChilds(details, feel, wind, visibility, bar, humid, dew);
+    appChilds(details, min, max, feel, wind, visibility, bar, humid, dew);
   }
 
   // utilities for dom manipulation
+
   function cr(element) {
     return document.createElement(element);
   }
@@ -99,5 +106,14 @@ export default function render() {
 
   function sa(element, attr, val) {
     element.setAttribute(attr, val);
+  }
+
+  // credits to: https://dev.to/jorik/country-code-to-flag-emoji-a21
+  function getFlagEmoji(countryCode) {
+    const codePoints = countryCode
+      .toUpperCase()
+      .split("")
+      .map((char) => 127397 + char.charCodeAt());
+    return String.fromCodePoint(...codePoints);
   }
 }
