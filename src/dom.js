@@ -4,21 +4,19 @@
 import getData from "./data";
 
 export default function render() {
-  getData("el paso").then((data) => dom(data));
+  let city = "el paso";
+  if (arguments[0]) {
+    city = arguments[0];
+  }
   const body = qs("body");
+  body.textContent = ""; // clears the body
+  getData(city).then((data) => dom(data));
 
   // generates the dom tree and fills in the information
   function dom(data) {
-    console.log(data);
-
-    // generate header
     header();
-
-    // generate dashboard
     dashboard(data);
-
-    // generate footer
-    appChilds(body, etc("footer", "©AshkanArabim, 2022"));
+    appChilds(body, etc("footer", "©AshkanArabim, 2022")); //footer
   }
 
   // make header
@@ -28,6 +26,12 @@ export default function render() {
     const searchbar = etc("input", "", "search");
     const unitbtn = etc("button", "C/F", "chunit");
     const searchbtn = etc("button", "Search", "searchbtn");
+
+    searchform.addEventListener("submit", (event) => {
+      event.preventDefault();
+      city = searchbar.value;
+      render(city);
+    });
 
     sa(searchbar, "placeholder", "search city");
     sa(searchbar, "type", "text");

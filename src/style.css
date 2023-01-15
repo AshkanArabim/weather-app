@@ -4,9 +4,27 @@
   margin: 0;
 }
 
+h1 {
+  font-size: 6rem ;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+p, button, input {
+  font-size: 1.5rem;
+}
+
 body {
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .hourly, .daily, .dashboard, header {
@@ -23,10 +41,12 @@ body {
 
 header{
   justify-content: center;
+  flex: 0 0 1;
 }
 
 .dashboard {
   justify-content: space-between;
+  flex: 1 1 0;
 }
 
 .dashboard > * {
@@ -35,12 +55,14 @@ header{
 
 .details > p {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
 }
 
 footer {
   position: absolute;
   inset: auto 0 0 0;
+  flex: 1 0 auto;
 }
 
 .hourly-chart {
@@ -51,4 +73,10 @@ footer {
 
 .hourly-chart > * {
   flex: 1 1 0;
+}
+
+.brief, .details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
