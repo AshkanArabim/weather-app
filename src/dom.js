@@ -2,17 +2,21 @@
 // job: renders the data provided by data.js by writing to the dom
 
 import getData from "./data";
+import getBG from "./background";
 
-export default function render(city, isMetric) {
+export default function dom(city, isMetric) {
   const body = qs("body");
   const unit = isMetric ? "°C" : "°F";
   const speedUnit = isMetric ? "m/s" : "mph";
   body.textContent = ""; // clears the body
-  getData(city, isMetric).then((data) => dom(data));
+  getData(city, isMetric).then((data) => render(data));
 
   // generates the dom tree and fills in the information
-  function dom(data) {
+  function render(data) {
     console.log(data);
+    getBG(city).then((imgdata) => {
+      console.log(imgdata);
+    });
     header();
     dashboard(data);
     appChilds(body, etc("footer", "©AshkanArabim, 2022")); //footer
@@ -28,10 +32,10 @@ export default function render(city, isMetric) {
 
     searchform.addEventListener("submit", (event) => {
       event.preventDefault();
-      render(searchbar.value, isMetric);
+      dom(searchbar.value, isMetric);
     });
     unitbtn.addEventListener("click", () => {
-      render(city, !isMetric);
+      dom(city, !isMetric);
     });
 
     sa(searchbar, "placeholder", "search city");
