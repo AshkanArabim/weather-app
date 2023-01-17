@@ -21,7 +21,7 @@ export default function dom(city, isMetric) {
     });
     header();
     dashboard(data);
-    appChilds(body, etc("footer", "©AshkanArabim, 2022")); //footer
+    footer();
   }
 
   // make header
@@ -81,6 +81,15 @@ export default function dom(city, isMetric) {
     appChilds(dashboard, brief, details);
     appChilds(brief, city, temp, sky);
     appChilds(details, min, max, feel, wind, visibility, bar, humid, dew);
+  }
+
+  function footer() {
+    const footer = etc("footer", "");
+    const myself = etc("p", "©AshkanArabim, 2022");
+    const pexels = etc("p", "Background images from Pexels.com");
+
+    appChilds(body, footer);
+    appChilds(footer, myself, pexels);
   }
 
   // utilities for dom manipulation
