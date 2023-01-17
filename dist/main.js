@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ getBG)\n/* harmony export */ });\nconst key = \"563492ad6f917000010000018c6f4e9da8934a81ae4c0129851c9ab6\";\r\n\r\nasync function getBG(weatherType) {\r\n  const url = `https://api.pexels.com/v1/search?query=${weatherType}+weather&size=large`;\r\n  return await fetch(url, {\r\n    headers: {\r\n      Authorization: key,\r\n    },\r\n  })\r\n    .then((resp) => resp.json())\r\n    .then((resp) => {\r\n      return resp.photos[0].src.original;\r\n    });\r\n}\r\n\n\n//# sourceURL=webpack://weather-app/./src/background.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ getBG)\n/* harmony export */ });\nconst key = \"563492ad6f917000010000018c6f4e9da8934a81ae4c0129851c9ab6\";\r\n\r\nasync function getBG(weatherType) {\r\n  const url = `https://api.pexels.com/v1/search?query=${weatherType}+weather&size=large&color=white`;\r\n  return await fetch(url, {\r\n    headers: {\r\n      Authorization: key,\r\n    },\r\n  })\r\n    .then((resp) => resp.json())\r\n    .then((resp) => {\r\n      const randomIndex = Math.floor(Math.random() * 14);\r\n      return resp.photos[randomIndex].src.original;\r\n    });\r\n}\r\n\n\n//# sourceURL=webpack://weather-app/./src/background.js?");
 
 /***/ }),
 
