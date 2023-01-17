@@ -14,7 +14,7 @@ export default function dom(city, isMetric) {
   // generates the dom tree and fills in the information
   function render(data) {
     console.log(data);
-    getBG(city).then((imgdata) => {
+    getBG(data.weather[0].main).then((imgdata) => {
       console.log(imgdata);
     });
     header();
