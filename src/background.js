@@ -6,5 +6,9 @@ export default async function getBG(weatherType) {
     headers: {
       Authorization: key,
     },
-  }).then((resp) => resp.json());
+  })
+    .then((resp) => resp.json())
+    .then((resp) => {
+      return resp.photos[0].src.original;
+    });
 }
