@@ -13,9 +13,10 @@ export default function dom(city, isMetric) {
 
   // generates the dom tree and fills in the information
   function render(data) {
-    console.log(data);
-    getBG(data.weather[0].main).then((imgdata) => {
-      console.log(imgdata);
+    // console.log(data);
+    getBG(data.weather[0].main).then((imgLink) => {
+      body.style.background = `url(${imgLink}) no-repeat center center`;
+      body.style.backgroundSize = "cover";
     });
     header();
     dashboard(data);
