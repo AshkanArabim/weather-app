@@ -15,7 +15,8 @@ export default function dom(city, isMetric) {
   function render(data) {
     // console.log(data);
     getBG(data.weather[0].main).then((imgLink) => {
-      body.style.background = `url(${imgLink}) no-repeat center center`;
+      body.style.background = `url(${imgLink}) no-repeat center`;
+      body.style.backgroundAttachment = "fixed";
       body.style.backgroundSize = "cover";
     });
     header();
