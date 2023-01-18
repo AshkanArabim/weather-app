@@ -13,12 +13,12 @@ export default function dom(city, isMetric) {
 
   // generates the dom tree and fills in the information
   function render(data) {
-    // console.log(data);
-    // getBG(data.weather[0].main).then((imgLink) => {
-    //   body.style.background = `url(${imgLink}) no-repeat center`;
-    //   body.style.backgroundAttachment = "fixed";
-    //   body.style.backgroundSize = "cover";
-    // });
+    console.log(data);
+    getBG(data.weather[0].main).then((imgLink) => {
+      body.style.background = `url(${imgLink}) no-repeat center`;
+      body.style.backgroundAttachment = "fixed";
+      body.style.backgroundSize = "cover";
+    });
     header();
     dashboard(data);
     footer();
@@ -85,8 +85,10 @@ export default function dom(city, isMetric) {
 
   function footer() {
     const footer = etc("footer", "");
-    const myself = etc("p", "©AshkanArabim, 2022");
+    const myself = etc("a", "©AshkanArabim, 2022");
     const pexels = etc("p", "Background images from Pexels.com");
+
+    myself.href = "https://github.com/AshkanArabim";
 
     appChilds(body, footer);
     appChilds(footer, myself, pexels);
