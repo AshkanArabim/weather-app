@@ -3,8 +3,17 @@
 
 import getData from "./data";
 import getBG from "./background";
+import cloudimg from "./assets/cloud.ico";
 
 export default function dom(city, isMetric) {
+  //tab icon and title
+  document.title = "Ashkan's Weather!";
+  const icon = cr("link");
+  icon.rel = "icon";
+  icon.href = cloudimg;
+  console.log(icon);
+  appChilds(document.head, icon);
+
   const body = qs("body");
   const unit = isMetric ? "°C" : "°F";
   const speedUnit = isMetric ? "m/s" : "mph";
@@ -86,9 +95,10 @@ export default function dom(city, isMetric) {
   function footer() {
     const footer = etc("footer", "");
     const myself = etc("a", "©AshkanArabim, 2022");
-    const pexels = etc("p", "Background images from Pexels.com");
+    const pexels = etc("a", "Background images from Pexels.com");
 
     myself.href = "https://github.com/AshkanArabim";
+    pexels.href = "https://pexels.com";
 
     appChilds(body, footer);
     appChilds(footer, myself, pexels);
