@@ -1,5 +1,5 @@
 import dom from "./dom.js";
-import data from "./data.js";
+import reset from "./reset.css";
 import css from "./style.css";
 
 const graphs = document.querySelectorAll(".hourly-chart > *");
